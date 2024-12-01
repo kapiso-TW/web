@@ -10,7 +10,6 @@ body {
 #lock-screen,
 #content {
   display: none;
-  margin-top: 300px;
 }
 
 #lock-screen.active {
