@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>A Page?</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <!--background-->
+    <div class="stars">
+        <!--lock page-->
+        <div id="lock-screen" class="container active lock">
+            <div class="form-control">
+                <input type="password" required="" id="password">
+                <label>
+                    <span></span><span></span>
+                    <span style="transition-delay:0ms">P</span><span style="transition-delay:50ms">a</span><span
+                        style="transition-delay:100ms">s</span><span style="transition-delay:150ms">s</span><span
+                        style="transition-delay:200ms">w</span><span style="transition-delay:250ms">o</span><span
+                        style="transition-delay:300ms">r</span><span style="transition-delay:350ms">d</span>
+                    <span style="transition-delay:400ms">(</span><span style="transition-delay:400ms">b</span><span
+                        style="transition-delay:400ms">i</span><span style="transition-delay:350ms">r</span><span
+                        style="transition-delay:300ms">t</span><span style="transition-delay:250ms">h</span><span
+                        style="transition-delay:200ms">d</span><span style="transition-delay:150ms">a</span><span
+                        style="transition-delay:100ms">y</span><span style="transition-delay:50ms">)</span>
+                </label>
+            </div>
+            <button onclick="unlock()" class="ubt">Unlock</button>
+            <p id="error-message" style="color: red; display: none;">!!! Wrong password !!!</p>
+            </p>
+        </div>
+        <!--unlock page-->
+        <div style="z-index: 4;">
+            <div id="content" class="container unlock">
+                <h1 style="color: #888282;">Chat pannel</h1>
+                <p style="color: #888282;">
+                    ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                </p>
+
+                <!-- Chat Section -->
+                <div>
+                    <div id="chatBox" class="chat-container">
+                        <!-- chat message-->
+                    </div>
+
+                    <div class="input-area">
+                        <div class="messageBox">
+                            <div class="fileUploadWrapper">
+                            </div>
+                            <input id="messageInput" name="messenger" type="text" placeholder="Message..."
+                                required="" />
+                            <button id="send-btn" type="submit" onclick="sendmes()">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
+                                    <path fill="none"
+                                        d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888">
+                                    </path>
+                                    <path stroke-linejoin="round" stroke-linecap="round" stroke-width="33.67"
+                                        stroke="#6c6c6c"
+                                        d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <script src="render.js"></script>
+</body>
+
+</html>
