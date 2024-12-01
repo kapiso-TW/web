@@ -194,9 +194,9 @@ body {
   outline: none;
 }
 
-.textInputWrapper:focus-within .textInput,
-.textInputWrapper .textInput:focus,
-.textInputWrapper .textInput:active {
+.textInput,
+.textInput:focus,
+.textInput:active {
   background-color: #353535;
 }
 
