@@ -299,7 +299,7 @@ body {
 
 /* send area */
 .messageBox {
-  width: fit-content;
+  width: calc(100% - 30px);
   height: 40px;
   display: flex;
   align-items: center;
@@ -341,6 +341,7 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s;
+  margin-left: auto;
 }
 
 #send-btn svg {
