@@ -51,10 +51,13 @@ socket.on('retractMessage', (messageId) => {
     const msgElement = document.getElementById(messageId + '-text');
     const msgdiv = document.getElementById(messageId);
     if (msgElement) {
-        
         msgElement.textContent = '[訊息已收回]';
         const retractButton = msgdiv.querySelector('.retract-button');
-        if (retractButton) retractButton.remove();
+        if (retractButton){
+            retractButton.remove();
+            console.log("remove button.");
+        }
+        console.log("remove all.");
     }
 });
 
