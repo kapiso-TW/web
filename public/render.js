@@ -130,10 +130,18 @@ async function hashPassword(password) {
 
 /* 轉換到聊天畫面 */
 function transitionToChatScreen() {
-    document.getElementById("lock-screen").style.display = "none";
-    document.getElementById("content").style.display = "block";
-    chatBox.scrollTop = chatBox.scrollHeight;
+    const lockScreen = document.getElementById("lock-screen");
+    const content = document.getElementById("content");
+
+    lockScreen.classList.remove('show');
+    content.classList.add('show');
+
+    setTimeout(() => {
+        const chatBox = document.getElementById('chatBox');
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }, 500);
 }
+
 
 
 /* 設置 Cookie */
