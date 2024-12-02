@@ -8,16 +8,15 @@ async function unlock() {
     const passwordInput = document.getElementById("password").value;
     const errorMessage = document.getElementById("error-message");
 
-    // 等待异步计算的哈希结果
     const hashedPassword = await hashPassword(passwordInput);
-    console.log("Hashed password:", hashedPassword); // 输出哈希值
+    console.log("Hashed password:", hashedPassword);
 
-    // 傳送 hashedPassword 到後端驗證
     socket.emit('setNickname', hashedPassword, async (response) => {
         if (response.success) {
             nickname = response.nickname; // 设置前端的 nickname
-            console.log(`Welcome, ${nickname}!`);
+            setCookie('nickname', nickname, 7); // 保存昵称到 cookie，7 天有效
 
+            console.log(`Welcome, ${nickname}!`);
             $(".lock").fadeOut(400, async function () {
                 document.getElementById("lock-screen").classList.remove("active");
                 document.getElementById("content").classList.add("active");
@@ -25,20 +24,25 @@ async function unlock() {
             await delay(400);
             $(".unlock").fadeIn(400);
         } else {
-            errorMessage.style.display = "block"; // 密碼錯誤
-            errorMessage.textContent = "密碼錯誤，請再試一次！";
+            errorMessage.style.display = "block"; // 密码错误
+            errorMessage.textContent = "密码错误，请再试一次！";
         }
     });
 }
 
 async function sendmes() {
-    const mess = document.getElementById("messageInput").value; // 獲取輸入框的值
+    if(nickname!=null && nickname!==""){
+        const mess = document.getElementById("messageInput").value; // 獲取輸入框的值
     if (mess.trim() !== "") { // 確保訊息不為空
         socket.emit('chatMessage', mess); // 發送訊息
         console.log(`${nickname} sent a message: ${mess}`);
         document.getElementById("messageInput").value = ""; // 清空輸入框
     } else {
         console.log("Message is empty, not sent.");
+    }
+    }else{
+        console.log("Name did not define, reload...");
+        history.go(0);
     }
 }
 
@@ -112,7 +116,7 @@ socket.on('retractMessage', (messageId) => {
         // 找到訊息內容的部分並修改其文字
         const messageContent = msgElement.querySelector('.text, .text-self');
         if (messageContent) {
-            messageContent.textContent = '已被收回';
+            messageContent.textContent = '[訊息已收回]';
         }
 
         const retractButton = msgElement.querySelector('.recall-button');
@@ -138,3 +142,31 @@ function retractMessage(messageId) {
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+function setCookie(name, value, days) {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+}
+
+function getCookie(name) {
+    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? match[2] : null;
+}
+
+window.onload = () => {
+    const storedNickname = getCookie('nickname');
+    if (storedNickname) {
+        nickname = storedNickname;
+        console.log(`Restored nickname from cookie: ${nickname}`);
+
+        // 自动隐藏锁屏界面，显示聊天界面
+        $(".lock").hide();
+        document.getElementById("lock-screen").classList.remove("active");
+        document.getElementById("content").classList.add("active");
+        $(".unlock").fadeIn(400);
+    } else {
+        console.log("No nickname stored in cookie.");
+        history.go(0);
+    }
+};
