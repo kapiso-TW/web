@@ -46,6 +46,8 @@ io.on('connection', (socket) => {
 
     // 接收新訊息
     socket.on('chatMessage', (msg) => {
+        if(socket.nickname == "Sally" || socket.nickname == "XXX"){
+            
         const messageId = `${Date.now()}-${Math.random()}`; // 生成唯一 ID
         const userMessage = { 
             id: messageId, 
@@ -57,6 +59,8 @@ io.on('connection', (socket) => {
         chatHistory.push(userMessage);
         saveChatHistory(); // 儲存到檔案
         io.emit('chatMessage', userMessage); // 廣播給所有用戶
+        }
+        
     });
 
     // 收回訊息
