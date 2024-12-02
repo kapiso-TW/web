@@ -1,5 +1,5 @@
 const socket = io(); // 必须在任何对 socket 的使用之前声明
-
+const page = 0;
 let nickname; // 儲存使用者名稱
 
 /* 解鎖頁面並傳送使用者名稱 */
@@ -13,6 +13,7 @@ async function unlock() {
 
     socket.emit('setNickname', hashedPassword, async (response) => {
         if (response.success) {
+            page = 1;
             nickname = response.nickname; // 设置前端的 nickname
             setCookie('nickname', nickname, 7); // 保存昵称到 cookie，7 天有效
 
@@ -31,7 +32,7 @@ async function unlock() {
 }
 
 async function sendmes() {
-    if(nickname!=null && nickname!==""){
+    if(nickname != null && nickname !== "" && page == 1){
         const mess = document.getElementById("messageInput").value; // 獲取輸入框的值
     if (mess.trim() !== "") { // 確保訊息不為空
         socket.emit('chatMessage', mess); // 發送訊息
@@ -155,7 +156,8 @@ function getCookie(name) {
 }
 
 window.onload = () => {
-    const storedNickname = getCookie('nickname');
+    if(page==1){
+        const storedNickname = getCookie('nickname');
     if (storedNickname) {
         nickname = storedNickname;
         console.log(`Restored nickname from cookie: ${nickname}`);
@@ -168,5 +170,6 @@ window.onload = () => {
     } else {
         console.log("No nickname stored in cookie.");
         history.go(0);
+    }
     }
 };
