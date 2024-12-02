@@ -46,20 +46,20 @@ io.on('connection', (socket) => {
 
     // 接收新訊息
     socket.on('chatMessage', (msg) => {
-        if(socket.nickname == "Sally" || socket.nickname == "XXX"){
-        const messageId = `${Date.now()}-${Math.random()}`; // 生成唯一 ID
-        const userMessage = { 
-            id: messageId, 
-            text: msg, 
-            sender: socket.nickname, 
-            timestamp: new Date().toISOString(), 
-            retracted: false 
-        };
-        chatHistory.push(userMessage);
-        saveChatHistory(); // 儲存到檔案
-        io.emit('chatMessage', userMessage); // 廣播給所有用戶
-        }else{
-            history.go(0);
+        if (socket.nickname) {
+            const messageId = `${Date.now()}-${Math.random()}`;
+            const userMessage = {
+                id: messageId,
+                text: msg,
+                sender: socket.nickname,
+                timestamp: new Date().toISOString(),
+                retracted: false
+            };
+            chatHistory.push(userMessage);
+            saveChatHistory();
+            io.emit('chatMessage', userMessage);
+        } else {
+            console.log("Unauthorized user tried to send a message.");
         }
     });
 
@@ -67,9 +67,9 @@ io.on('connection', (socket) => {
     socket.on('retractMessage', (messageId) => {
         const message = chatHistory.find(msg => msg.id === messageId);
         if (message && message.sender === socket.nickname) {
-            message.retracted = true; // 標記為已收回
-            saveChatHistory(); // 儲存更新後的檔案
-            io.emit('retractMessage', messageId); // 廣播收回訊息事件
+            message.retracted = true;
+            saveChatHistory();
+            io.emit('retractMessage', messageId);
         }
     });
 
@@ -89,16 +89,5 @@ function saveChatHistory() {
 }
 
 server.listen(3000, () => {
-    console.log('Server is running');
-});
-
-// 列印聊天记录到控制台
-function printChatHistory() {
-    console.log('Chat History:', chatHistory);
-}
-
-// 示例调用：在特定事件触发时列印聊天记录
-app.get('/printChatHistory', (req, res) => {
-    printChatHistory();
-    res.send('Chat history has been printed to the console.');
+    console.log('Server is running on http://localhost:3000');
 });
