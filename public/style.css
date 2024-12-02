@@ -10,6 +10,7 @@ body {
 #lock-screen,
 #content {
   display: none;
+  transition: opacity 0.5s ease-in-out;
 }
 
 #lock-screen.active {
@@ -18,6 +19,11 @@ body {
 
 #content.active {
   display: block;
+}
+
+#lock-screen.show,
+#content.show {
+  opacity: 1;
 }
 
 .container {
