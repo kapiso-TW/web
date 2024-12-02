@@ -1,5 +1,5 @@
 const socket = io(); // 必须在任何对 socket 的使用之前声明
-const page = 0;
+let page = 0;
 let nickname; // 儲存使用者名稱
 
 /* 解鎖頁面並傳送使用者名稱 */
