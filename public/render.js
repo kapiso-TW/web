@@ -49,17 +49,19 @@ socket.on('chatHistory', (history) => {
 /* 收回訊息處理 */
 socket.on('retractMessage', (messageId) => {
     const msgElement = document.getElementById(messageId + '-text');
-    const msgdiv = document.getElementById(messageId);
+    const msgWrapper = document.getElementById(messageId);
+    
     if (msgElement) {
         msgElement.textContent = '[訊息已收回]';
-        const retractButton = msgdiv.querySelector('.retract-button');
-        if (retractButton){
+        msgElement.classList.add('retracted');
+        
+        const retractButton = msgWrapper.querySelector('.recall-button');
+        if (retractButton) {
             retractButton.remove();
-            console.log("remove button.");
         }
-        console.log("remove all.");
     }
 });
+
 
 /* 添加訊息到聊天框 */
 function addMessage(msg) {
