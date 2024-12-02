@@ -123,9 +123,10 @@ async function hashPassword(password) {
 /* 轉換到聊天畫面 */
 function transitionToChatScreen() {
     document.getElementById("lock-screen").style.display = "none";
-    document.getElementById("chat-screen").style.display = "block";
+    document.getElementById("unlock-screen").style.display = "block";
     chatBox.scrollTop = chatBox.scrollHeight;
 }
+
 
 /* 設置 Cookie */
 function setCookie(name, value, days) {
