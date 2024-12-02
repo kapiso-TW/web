@@ -155,7 +155,7 @@ socket.on('reload', () => {
 
     for (let cookie of cookies) {
         let cookieName = cookie.split("=")[0].trim();
-        deleteCookie(cookieName);
+        document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
     }
 
     window.location.reload();
