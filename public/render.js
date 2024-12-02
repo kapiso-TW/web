@@ -50,7 +50,7 @@ socket.on('chatHistory', (history) => {
 socket.on('retractMessage', (messageId) => {
     const msgElement = document.getElementById(messageId);
     if (msgElement) {
-        msgElement.querySelector('.message-text').textContent = '[訊息已收回]';
+        msgElement.querySelector('.text').textContent = '[訊息已收回]';
         const retractButton = msgElement.querySelector('.retract-button');
         if (retractButton) retractButton.remove();
     }
