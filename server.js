@@ -87,3 +87,14 @@ function saveChatHistory() {
 server.listen(3000, () => {
     console.log('Server is running');
 });
+
+// 列印聊天记录到控制台
+function printChatHistory() {
+    console.log('Chat History:', chatHistory);
+}
+
+// 示例调用：在特定事件触发时列印聊天记录
+app.get('/printChatHistory', (req, res) => {
+    printChatHistory();
+    res.send('Chat history has been printed to the console.');
+});
