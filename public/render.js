@@ -48,9 +48,10 @@ socket.on('chatHistory', (history) => {
 
 /* 收回訊息處理 */
 socket.on('retractMessage', (messageId) => {
-    const msgElement = document.getElementById(messageId);
+    const msgElement = document.getElementById(messageId + '-text');
     if (msgElement) {
-        msgElement.querySelector('.text').textContent = '[訊息已收回]';
+        
+        msgElement.textContent = '[訊息已收回]';
         const retractButton = msgElement.querySelector('.retract-button');
         if (retractButton) retractButton.remove();
     }
@@ -74,6 +75,7 @@ function addMessage(msg) {
     // 訊息內部容器，設定文字對齊方式
     const messageContentInner = document.createElement('div');
     messageContentInner.style.textAlign = 'left';
+    messageContentInner.id = msg.id + "-text";
 
     // 設定訊息內容
     if (msg.retracted) {
@@ -158,5 +160,6 @@ socket.on('reload', () => {
         document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
     }
 
+    alert("名稱驗證錯誤! 請重新登入!");
     window.location.reload();
 });
