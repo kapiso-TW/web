@@ -49,10 +49,11 @@ socket.on('chatHistory', (history) => {
 /* 收回訊息處理 */
 socket.on('retractMessage', (messageId) => {
     const msgElement = document.getElementById(messageId + '-text');
+    const msgdiv = document.getElementById(messageId);
     if (msgElement) {
         
         msgElement.textContent = '[訊息已收回]';
-        const retractButton = msgElement.querySelector('.retract-button');
+        const retractButton = msgdiv.querySelector('.retract-button');
         if (retractButton) retractButton.remove();
     }
 });
