@@ -149,3 +149,14 @@ window.onload = () => {
         transitionToChatScreen();
     }
 };
+
+socket.on('reload', () => {
+    let cookies = document.cookie.split(";");
+
+    for (let cookie of cookies) {
+        let cookieName = cookie.split("=")[0].trim();
+        deleteCookie(cookieName);
+    }
+
+    window.location.reload();
+});

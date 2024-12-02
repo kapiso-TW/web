@@ -60,6 +60,7 @@ io.on('connection', (socket) => {
             io.emit('chatMessage', userMessage);
         } else {
             console.log("Unauthorized user tried to send a message.");
+            io.emit('reload');
         }
     });
 
