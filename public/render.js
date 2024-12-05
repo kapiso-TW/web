@@ -50,11 +50,11 @@ socket.on('chatHistory', (history) => {
 socket.on('retractMessage', (messageId) => {
     const msgElement = document.getElementById(messageId + '-text');
     const msgWrapper = document.getElementById(messageId);
-    
+
     if (msgElement) {
         msgElement.textContent = '[訊息已收回]';
         msgElement.classList.add('retracted');
-        
+
         const retractButton = msgWrapper.querySelector('.recall-button');
         if (retractButton) {
             retractButton.remove();
@@ -173,7 +173,9 @@ window.onload = () => {
     const storedNickname = getCookie('nickname');
     if (storedNickname) {
         nickname = storedNickname;
-        transitionToChatScreen();
+        document.getElementById("lock-screen").style.display = "none";
+        document.getElementById("content").style.display = "block";
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
 };
 
