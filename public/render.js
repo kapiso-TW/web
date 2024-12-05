@@ -55,7 +55,7 @@ socket.on('retractMessage', (messageId) => {
         msgElement.textContent = '[訊息已收回]';
         msgElement.classList.add('retracted');
 
-        const retractButton = msgWrapper.querySelector('.tooltip');
+        const retractButton = msgWrapper.querySelector('.tooltip .rbt');
         if (retractButton) {
             retractButton.remove();
         }
