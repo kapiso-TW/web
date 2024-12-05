@@ -52,15 +52,18 @@ socket.on('retractMessage', (messageId) => {
     const msgWrapper = document.getElementById(messageId);
 
     if (msgElement) {
+        // 修改訊息內容
         msgElement.textContent = '[訊息已收回]';
         msgElement.classList.add('retracted');
 
-        const retractButton = msgWrapper.querySelector('.tooltip .rbt');
+        // 查找與刪除按鈕
+        const retractButton = msgWrapper.querySelector('button.rbt');
         if (retractButton) {
             retractButton.remove();
         }
     }
 });
+
 
 
 /* 添加訊息到聊天框 */
