@@ -64,8 +64,6 @@ socket.on('retractMessage', (messageId) => {
     }
 });
 
-
-
 /* 添加訊息到聊天框 */
 function addMessage(msg) {
     const messageWrapper = document.createElement('div');
