@@ -130,9 +130,26 @@ async function hashPassword(password) {
 
 /* 轉換到聊天畫面 */
 function transitionToChatScreen() {
-    document.getElementById("lock-screen").style.display = "none";
-    document.getElementById("content").style.display = "block";
-    chatBox.scrollTop = chatBox.scrollHeight;
+    const lockScreen = document.getElementById("lock-screen");
+    const content = document.getElementById("content");
+
+    // 淡出 lock-screen
+    lockScreen.classList.add("fade-out");
+    lockScreen.classList.remove("fade-in");
+
+    // 等待淡出結束後顯示 content
+    setTimeout(() => {
+        lockScreen.style.display = "none";
+        content.style.display = "block";
+
+        // 淡入 content
+        content.classList.add("fade-in");
+        content.classList.remove("fade-out");
+
+        // 滾動到最新聊天訊息
+        const chatBox = document.getElementById("chatBox");
+        if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
+    }, 500); // 與 CSS 動畫的時間匹配
 }
 
 
