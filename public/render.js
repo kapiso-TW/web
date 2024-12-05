@@ -149,7 +149,7 @@ function transitionToChatScreen() {
         // 滾動到最新聊天訊息
         const chatBox = document.getElementById("chatBox");
         if (chatBox) chatBox.scrollTop = chatBox.scrollHeight;
-    }, 500); // 與 CSS 動畫的時間匹配
+    }, 700); // 與 CSS 動畫的時間匹配
 }
 
 
