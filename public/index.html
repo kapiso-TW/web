@@ -94,6 +94,20 @@
 
     <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
     <script src="render.js"></script>
+    <script>
+        const backgroundDiv = document.querySelector('.stars');
+
+        // 設置背景高度等於內容高度
+        function adjustBackgroundHeight() {
+            const contentHeight = document.body.scrollHeight; // 獲取內容的高度
+            backgroundDiv.style.height = contentHeight + 'px';
+        }
+
+        // 初始設置和窗口大小變化時調整
+        adjustBackgroundHeight();
+        window.addEventListener('resize', adjustBackgroundHeight);
+
+    </script>
 </body>
 
 </html>
