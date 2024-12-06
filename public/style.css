@@ -29,7 +29,7 @@ body {
 .stars {
   width: 100%;
   background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
@@ -476,7 +476,7 @@ body {
 }
 
 .inner {
-  color: #ffe5e5;
+  color: #ffe6d9;
   word-wrap: break-word;
   display: block;
   max-width: 500px;
